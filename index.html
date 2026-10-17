@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FSRS Flashcards Avançado</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+
+  <!-- TELA DE LOGIN -->
+  <div id="auth-screen" class="container">
+    <h1>FSRS Flashcards</h1>
+    <div class="card-box">
+      <h2>Entrar no Sistema</h2>
+      <input type="email" id="email-input" placeholder="Seu e-mail">
+      <input type="password" id="password-input" placeholder="Sua senha">
+      <button id="btn-login" class="btn primary">Entrar</button>
+      <button id="btn-signup" class="btn secondary">Criar Conta</button>
+    </div>
+  </div>
+
+  <!-- APP PRINCIPAL -->
+  <div id="app-screen" class="container hidden">
+    <header>
+      <h2>Meus Estudos</h2>
+      <div>
+        <span id="user-email"></span>
+        <button id="btn-logout" class="btn danger">Sair</button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button id="tab-decks-btn" class="active">Baralhos</button>
+      <button id="tab-study-btn">Estudar (<span id="due-count">0</span>)</button>
+      <button id="tab-add-btn">Novo Card</button>
+    </div>
+
+    <!-- ABA 1: ÁRVORE DE BARALHOS E SUB-BARALHOS -->
+    <section id="tab-decks">
+      <div class="card-box">
+        <h3>Seus Baralhos</h3>
+        <p class="subtext">Clique em um baralho para filtrar as revisões:</p>
+        <div id="deck-tree-container"></div>
+      </div>
+    </section>
+
+    <!-- ABA 2: REVISÃO DE CARDS -->
+    <section id="tab-study" class="hidden">
+      <div id="card-container" class="card-box">
+        <div class="card-header-info">
+          <span id="deck-name" class="deck-tag">Geral</span>
+          <span id="card-type-tag" class="type-tag">Básico</span>
+        </div>
+
+        <!-- 1. ENUNCIADO / PERGUNTA -->
+        <div id="card-question" class="content-question">Selecione um baralho para iniciar.</div>
+        
+        <!-- 2. ALTERNATIVAS (Para o Modo Ocultar Alternativas) -->
+        <div id="card-options-container" class="options-grid hidden"></div>
+
+        <!-- 3. RESPOSTA / EXPLICAÇÃO -->
+        <div id="card-answer-container" class="answer-box hidden">
+          <div id="card-answer-text"></div>
+        </div>
+
+        <!-- BOTÕES DE ETAPA (Fluxo de Revelação) -->
+        <button id="btn-reveal-options" class="btn primary full hidden">Ver Alternativas</button>
+        <button id="btn-reveal-gabarito" class="btn secondary full hidden">Ver Gabarito & Explicação</button>
+        <button id="btn-show-basic-answer" class="btn primary full hidden">Mostrar Resposta</button>
+
+        <!-- BOTÕES DO FSRS -->
+        <div id="fsrs-buttons" class="rating-grid hidden">
+          <button data-rating="1" class="btn-rate again">De Novo<br><small>Errou</small></button>
+          <button data-rating="2" class="btn-rate hard">Difícil<br><small>Dúvida</small></button>
+          <button data-rating="3" class="btn-rate good">Bom<br><small>Certo</small></button>
+          <button data-rating="4" class="btn-rate easy">Fácil<br><small>Rápido</small></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 3: CRIAR NOVO CARD -->
+    <section id="tab-add" class="hidden">
+      <div class="card-box">
+        <h3>Adicionar Flashcard</h3>
+        
+        <label>Baralho (Use "::" para sub-baralho):</label>
+        <input type="text" id="new-deck" placeholder="Ex: Biologia::Citologia" value="Geral">
+
+        <label>Tipo de Card:</label>
+        <select id="new-card-type">
+          <option value="cover_options">1. Ocultar Alternativas (4 Opções)</option>
+          <option value="vf">2. Verdadeiro ou Falso (V/F)</option>
+          <option value="basic">3. Básico (Frente e Verso Simples)</option>
+        </select>
+
+        <!-- CAMPOS DINÂMICOS DEPENDENDO DO TIPO -->
+        <div id="form-question-group">
+          <label>Enunciado / Pergunta:</label>
+          <textarea id="new-question" placeholder="Escreva a pergunta..."></textarea>
+        </div>
+
+        <!-- Opções para o modo 4 Alternativas -->
+        <div id="form-options-group">
+          <label>4 Alternativas:</label>
+          <input type="text" id="opt-a" placeholder="Alternativa A">
+          <input type="text" id="opt-b" placeholder="Alternativa B">
+          <input type="text" id="opt-c" placeholder="Alternativa C">
+          <input type="text" id="opt-d" placeholder="Alternativa D">
+          
+          <label>Alternativa Correta:</label>
+          <select id="correct-opt">
+            <option value="A">Alternativa A</option>
+            <option value="B">Alternativa B</option>
+            <option value="C">Alternativa C</option>
+            <option value="D">Alternativa D</option>
+          </select>
+        </div>
+
+        <!-- Opção para V/F -->
+        <div id="form-vf-group" class="hidden">
+          <label>Gabarito:</label>
+          <select id="vf-correct">
+            <option value="V">Verdadeiro (V)</option>
+            <option value="F">Falso (F)</option>
+          </select>
+        </div>
+
+        <div id="form-explanation-group">
+          <label id="lbl-explanation">Justificativa / Explicação:</label>
+          <textarea id="new-explanation" placeholder="Explique o motivo do gabarito..."></textarea>
+        </div>
+
+        <button id="btn-save-card" class="btn primary full">Salvar Card</button>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
