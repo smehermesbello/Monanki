@@ -7,24 +7,29 @@ import {
   getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, where 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+// Suas chaves reais do projeto MonAnki
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY_AQUI",
-  authDomain: "seu-projeto.firebaseapp.com",
-  projectId: "seu-projeto",
-  storageBucket: "seu-projeto.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
+  apiKey: "AIzaSyBUz32ZDGV_fK8zZQo6odoM7z2bA4EgtX8",
+  authDomain: "monanki.firebaseapp.com",
+  databaseURL: "https://monanki-default-rtdb.firebaseio.com",
+  projectId: "monanki",
+  storageBucket: "monanki.firebasestorage.app",
+  messagingSenderId: "514822463108",
+  appId: "1:514822463108:web:c9e05674fadad38c1a6cd1",
+  measurementId: "G-PBQRWPCVJ7"
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
+// Funções de Autenticação
 export const registerUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 export const loginUser = (email, password) => signInWithEmailAndPassword(auth, email, password);
 export const logoutUser = () => signOut(auth);
 export const listenAuth = (callback) => onAuthStateChanged(auth, callback);
 
+// Funções de Banco de Dados (Cards)
 export async function createCardInDB(userId, cardData) {
   return await addDoc(collection(db, "cards"), {
     userId,
