@@ -1,0 +1,51 @@
+* { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+body { background-color: #f4f6f8; color: #333; display: flex; justify-content: center; padding: 15px; }
+
+.container { width: 100%; max-width: 550px; margin-top: 10px; }
+.hidden { display: none !important; }
+
+.card-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.subtext { font-size: 13px; color: #666; margin-bottom: 15px; }
+
+label { font-size: 13px; font-weight: bold; color: #444; display: block; margin-top: 10px; margin-bottom: 4px; }
+input, textarea, select { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+textarea { height: 75px; resize: vertical; }
+
+.btn { border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn.primary { background: #0066ff; color: white; }
+.btn.secondary { background: #e0e0e0; color: #333; margin-top: 8px; }
+.btn.danger { background: #ff4d4d; color: white; }
+.btn.full { width: 100%; }
+
+.tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+.tabs button { flex: 1; padding: 10px; border: none; background: #e0e0e0; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.tabs button.active { background: #0066ff; color: white; font-weight: bold; }
+
+.card-header-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.deck-tag { font-size: 12px; background: #eef4ff; color: #0066ff; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+.type-tag { font-size: 11px; background: #eee; color: #555; padding: 3px 6px; border-radius: 4px; }
+
+.content-question { font-size: 17px; font-weight: 600; margin-bottom: 15px; color: #222; line-height: 1.4; }
+
+/* ESTILOS DE ALTERNATIVAS */
+.options-grid { display: flex; flex-direction: column; gap: 8px; margin: 15px 0; }
+.option-item { padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; background: #fdfdfd; font-size: 14px; line-height: 1.3; }
+.option-item.correct { background-color: #d4edda; border-color: #c3e6cb; color: #155724; font-weight: bold; }
+
+.answer-box { margin-top: 15px; padding: 12px; background: #f8f9fa; border-left: 4px solid #0066ff; border-radius: 4px; font-size: 14px; color: #333; line-height: 1.4; }
+
+/* ÁRVORE DE SUB-BARALHOS */
+.deck-tree-item { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.deck-tree-item:hover { background-color: #f8f9fa; }
+.deck-name-title { font-weight: 500; font-size: 14px; }
+.badge-due { background: #ff4d4f; color: white; font-size: 11px; padding: 2px 7px; border-radius: 10px; font-weight: bold; }
+
+/* BOTÕES FSRS */
+.rating-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 15px; }
+.btn-rate { border: none; padding: 10px 4px; border-radius: 6px; color: white; cursor: pointer; font-size: 12px; }
+.btn-rate small { font-size: 10px; opacity: 0.85; font-weight: normal; }
+.btn-rate.again { background: #ff4d4f; }
+.btn-rate.hard { background: #fa8c16; }
+.btn-rate.good { background: #52c41a; }
+.btn-rate.easy { background: #1890ff; }
